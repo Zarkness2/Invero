@@ -24,7 +24,16 @@ class Compat : ClassVisitor(0) {
 
         if (clazz.hasAnnotation(DefItemProvider::class.java)) {
             val annotation = clazz.getAnnotation(DefItemProvider::class.java)
-            val provider = clazz.newInstance() as ItemSourceProvider
+            // 捕获 NoClassDefFoundError 以处理缺失的可选依赖
+            val provider = runCatching {
+                clazz.newInstance() as ItemSourceProvider
+            }.getOrElse { 
+                // 如果是类加载错误（缺少依赖）
+                if (it is NoClassDefFoundError || it.cause is NoClassDefFoundError) {
+                    return
+                }
+                throw it
+            }
             if (provider is PluginHook && !provider.isHooked) return
 
             annotation.property("namespaces", arrayListOf<String>())
