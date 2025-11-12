@@ -80,20 +80,6 @@ object InveroSettings {
         }
 
     /**
-     * 是否启用更新检查
-     */
-    @ConfigNode("update-checker.enabled")
-    var updateCheckerEnabled = true
-        private set
-
-    /**
-     * 更新检查间隔（天）
-     */
-    @ConfigNode("update-checker.check-interval-days")
-    var updateCheckerInterval = 1
-        private set
-
-    /**
      * 是否启用全局节点功能
      */
     @ConfigNode("GlobalNodes.enabled")

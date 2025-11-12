@@ -33,10 +33,6 @@ paste-success: '&8[&fInvero&8] &7请通过此链接查看相关文本: &a{0}'
 paste-config-loaded: '&8[&fInvero&8] &7已加载剪贴板配置, 当前服务: &f{0}'
 paste-service-error: '&8[&fInvero&8] &c剪贴板服务错误: &7{0}'
 
-update-checking: '&8[&fInvero&8] &7正在检查更新...'
-update-available: '&8[&fInvero&8] &e发现新版本！当前版本：&c{0}&e，最新版本：&a{1}'
-update-url: '&8[&fInvero&8] &e请访问：&bhttps://invero.8aka.org/download &e获取最新版本'
-up-to-date: '&8[&fInvero&8] &7您使用的是最新版本！'
 
 throwable-print: '&8[&fInvero&8] &c产生了一个错误'
 

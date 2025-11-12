@@ -55,13 +55,6 @@ Patch:
   # 详见 https://github.com/TabooLib/taboolib/blob/dev/6.2.3/module/bukkit/bukkit-ui/src/main/kotlin/taboolib/module/ui/MenuBuilder.kt#L40
   enable-raw-title-in-vanilla-inventory: false
 
-# 更新检查设置 | update check
-update-checker:
-  # 是否启用更新检查 | enable update check?
-  enabled: true
-  # 检查频率（天） | check interval (days)
-  check-interval-days: 1
-
 Paste:
   # 支持 | support: pastegg, lucko, pastebin
   service-type: lucko
