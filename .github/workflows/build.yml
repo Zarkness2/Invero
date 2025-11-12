@@ -1,4 +1,4 @@
-name: Plugin Build
+name: Build Plugin
 
 on:
   push:
@@ -9,24 +9,39 @@ on:
 
 jobs:
   build:
-    if: contains(github.event.head_commit.message, '[skip]') == false
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: Setup Java
+
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: 21
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-      - name: Make Gradle Wrapper Executable
-        run: chmod +x ./gradlew
-      - name: Build
+          distribution: temurin
+          java-version: '21'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Clean and build with Gradle
         run: ./gradlew clean build
-      - name: Capture Build Artifacts
+
+      - name: List plugin artifacts
+        run: find ./build/libs -name "*.jar" -type f
+
+      - name: Upload plugin JAR
         uses: actions/upload-artifact@v4
         with:
-          name: Artifacts
+          name: Invero-${{ github.run_number }}
           path: build/libs/Invero-*.jar
