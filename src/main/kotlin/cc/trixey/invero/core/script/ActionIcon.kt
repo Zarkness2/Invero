@@ -4,6 +4,7 @@ import cc.trixey.invero.core.icon.IconElement
 import cc.trixey.invero.core.script.loader.InveroKetherParser
 import cc.trixey.invero.ui.common.Panel
 import cc.trixey.invero.ui.common.panel.ElementalPanel
+import cc.trixey.invero.ui.common.panel.GeneratorPanel
 import cc.trixey.invero.ui.common.panel.TypedPanelContainer
 import taboolib.module.kether.combinationParser
 
@@ -52,6 +53,19 @@ object ActionIcon {
             when (panel) {
                 is TypedPanelContainer<*> -> {
                     panel.panels.filter { panel.isPanelValid(it) }.forEach { updatePanel(it, action) }
+                }
+
+                is GeneratorPanel<*, *> -> {
+                    // 对于生成器面板，refresh 时需要重置缓存并重新渲染
+                    if (action == "refresh") {
+                        panel.reset()
+                        panel.render()
+                    } else {
+                        // 对于其他操作（如 update、relocate），也要处理其中的图标元素
+                        panel.elements.value.keys.forEach {
+                            if (it is IconElement) it.handle(action)
+                        }
+                    }
                 }
 
                 is ElementalPanel -> {

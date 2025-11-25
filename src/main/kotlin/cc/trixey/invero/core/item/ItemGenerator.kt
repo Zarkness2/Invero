@@ -164,15 +164,16 @@ private val String.prefixColored: String
     else this
 
 private fun List<String>.loreColored(enhancedProcess: Boolean?): List<String> {
-    return if (enhancedProcess != true) {
-        map { it.prefixColored }
-    } else {
-        val iterator = iterator()
+    val iterator = iterator()
 
-        buildList {
-            while (iterator.hasNext()) {
-                val it = iterator.next()
-                this += it.split("\\n").map { it.prefixColored }
+    return buildList {
+        while (iterator.hasNext()) {
+            val line = iterator.next()
+            // 处理换行符，支持 YAML |- 多行字符串格式
+            if (line.contains('\n')) {
+                this += line.split("\n").map { it.prefixColored }
+            } else {
+                this += line.prefixColored
             }
         }
     }
