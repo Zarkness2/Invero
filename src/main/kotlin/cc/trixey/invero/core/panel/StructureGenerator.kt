@@ -31,6 +31,7 @@ class StructureGenerator(
     val sortBy: String?,
     @SerialName("extension")
     val extenedProperties: Map<String, String>?,
+    val data: Map<String, String>?,
     @Serializable(with = IconSerializer::class)
     @JsonNames("template")
     val output: Icon,

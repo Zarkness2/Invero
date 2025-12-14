@@ -105,8 +105,10 @@ class PanelGenerator(
     }
 
     private fun generate(session: Session): List<Object> {
+        // 将 data 属性传递到 Context 的 extVars 中，以便生成器可以访问
+        val extVars = settings.data?.toMap() ?: emptyMap()
         val created = settings.create().apply {
-            generate(Context(session))
+            generate(Context(session.viewer, session, extVars = extVars))
             if (settings.extenedObjects != null) {
                 generated = generated!! + settings.extenedObjects
             }

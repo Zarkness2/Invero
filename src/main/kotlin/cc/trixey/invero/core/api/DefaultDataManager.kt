@@ -12,7 +12,6 @@ import taboolib.common.platform.PlatformFactory
 import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.console
 import taboolib.common.platform.function.getDataFolder
-import taboolib.common.platform.function.info
 import taboolib.common.platform.function.submit
 import taboolib.expansion.*
 import taboolib.module.lang.sendLang
@@ -87,7 +86,6 @@ class DefaultDataManager : InveroDataManager {
         @SubscribeEvent
         fun e(e: PlayerJoinEvent) {
             e.player.setupDataContainer()
-            info("[DEBUG] 初始化玩家 ${e.player.name} 的私有数据容器")
         }
 
         @SubscribeEvent
