@@ -100,7 +100,7 @@ jobs:
             -F \"slug=invero\" \
             -F \"version=$VERSION\" \
             -F \"description=灵活强大的多功能容器 GUI 解决方案\" \
-            -F \"docUrl=https://invero.8aka.org/\" \
+            -F \"docUrl=https://invero.hhhhhy.kim/\" \
             -F \"files=@$JAR_FILE\""
           
           # 如果存在版本日志文件，添加到上传列表
