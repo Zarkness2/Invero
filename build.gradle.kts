@@ -7,6 +7,7 @@ plugins {
     kotlin("jvm") version "2.2.0"
     kotlin("plugin.serialization") version "2.2.0"
     id("io.izzel.taboolib") version "2.0.27"
+    `maven-publish`
 }
 
 taboolib {
@@ -156,4 +157,33 @@ java {
 // 编码设置
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+}
+
+// Maven 发布配置
+publishing {
+    repositories {
+        maven {
+            name = "hiusers"
+            url = uri("https://repo.hiusers.com/releases")
+            credentials {
+                username = project.findProperty("MAVEN_USERNAME") as String? ?: System.getenv("MAVEN_USERNAME") ?: ""
+                password = project.findProperty("MAVEN_PASSWORD") as String? ?: System.getenv("MAVEN_PASSWORD") ?: ""
+            }
+        }
+    }
+    
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group as String
+            artifactId = project.name
+            version = "${project.version as String}-api"
+            
+            // 发布 API JAR
+            val apiJarFile = file("${project.buildDir}/libs/${project.name}-${project.version as String}-api.jar")
+            artifact(apiJarFile) {
+                extension = "jar"
+                builtBy(tasks.named("taboolibBuildApi"))
+            }
+        }
+    }
 }
