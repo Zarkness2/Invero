@@ -5,9 +5,10 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.internal.parser.TokenParser
-import net.kyori.adventure.platform.bukkit.BukkitComponentSerializer
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.AMPERSAND_CHAR
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.SECTION_CHAR
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import net.kyori.adventure.platform.bukkit.BukkitAudiences
 import taboolib.platform.BukkitPlugin
 
@@ -26,12 +27,12 @@ object Message {
 
     @JvmStatic
     val gsonBuilder by lazy {
-        BukkitComponentSerializer.gson()
+        GsonComponentSerializer.gson()
     }
 
     @JvmStatic
     val legacyBuilder by lazy {
-        BukkitComponentSerializer.legacy()
+        LegacyComponentSerializer.legacySection()
     }
 
     @JvmStatic
