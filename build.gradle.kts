@@ -6,14 +6,14 @@ plugins {
     java
     kotlin("jvm") version "2.2.0"
     kotlin("plugin.serialization") version "2.2.0"
-    id("io.izzel.taboolib") version "2.0.27"
+    id("io.izzel.taboolib") version "2.0.38"
     `maven-publish`
 }
 
 taboolib {
 
     version {
-        taboolib = "6.2.4-65252583"
+        taboolib = "6.3.0-75b18a2"
     }
 
     env {
@@ -38,13 +38,7 @@ taboolib {
 
     description {
         name(rootProject.name)
-
         desc("灵活强大的多功能容器 GUI 解决方案")
-
-        links {
-            name("homepage").url("https://invero.8aka.org/")
-        }
-
     }
 
     // 重定向
@@ -69,7 +63,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.9.0")
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.9.0")
 
-    // Adventure API - 使用更兼容的版本以支持更广泛的 MC 版本
+    // Adventure API
     compileOnly("net.kyori:adventure-api:4.24.0")
     compileOnly("net.kyori:adventure-text-minimessage:4.24.0")
     compileOnly("net.kyori:adventure-text-serializer-gson:4.24.0")
@@ -79,6 +73,8 @@ dependencies {
     // Minecraft Core
     compileOnly("ink.ptms.core:v12105:12105:mapped")
     compileOnly("ink.ptms.core:v12105:12105:universal")
+    compileOnly("ink.ptms.core:v260100:260100")
+    compileOnly("ink.ptms.core:v260100:260100-minimize")
     compileOnly("ink.ptms:nms-all:1.0.0")
 
     compileOnly("io.netty:netty-all:4.1.106.Final")
@@ -100,8 +96,8 @@ dependencies {
     compileOnly("com.github.LoneDev6:API-ItemsAdder:3.6.3-beta-14")
 
     // CraftEngine
-    compileOnly("net.momirealms:craft-engine-core:0.0.22") { isTransitive = false }
-    compileOnly("net.momirealms:craft-engine-bukkit:0.0.22") { isTransitive = false }
+    compileOnly("net.momirealms:craft-engine-core:26.6.1") { isTransitive = false }
+    compileOnly("net.momirealms:craft-engine-bukkit:26.6.1") { isTransitive = false }
 
     // MMOItems
     compileOnly("io.lumine:MythicLib-dist:1.6.2-SNAPSHOT") { isTransitive = false } // Required by MMOItems API
